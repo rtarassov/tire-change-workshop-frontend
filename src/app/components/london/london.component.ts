@@ -12,6 +12,8 @@ export class LondonComponent implements OnInit {
   dateFrom: FormControl;
   dateUntil: FormControl;
   formData: FormGroup;
+  errorCode: number;
+  success: boolean;
   availableTimes: AvailableTime[] = [];
 
   constructor(private http: HttpClient){}
@@ -23,9 +25,10 @@ export class LondonComponent implements OnInit {
     })
   }
   onClickSubmit(data) {
+    this.errorCode = 0;
     this.dateFrom = data.dateFrom;
     this.dateUntil = data.dateUntil;
-    this.findAvailableTimes();
+    this.findAvailableTimes();    
   }
 
   public findAvailableTimes() {
@@ -33,9 +36,12 @@ export class LondonComponent implements OnInit {
     this.http.get<AvailableTime[]>(url).subscribe(
       response => {
         this.availableTimes = response;
+        this.success = true;
       },
       error => {
-        alert("An error has occurred") //Div for error
+        this.errorCode = error.status
+        this.success = false;
+        this.availableTimes = [];
       }
     );
   }

@@ -1,18 +1,43 @@
-<div class="my-5">
+<div class="p-3 mb-2 bg-danger bg-gradient text-white" *ngIf="errorCode==400">
+    <p>Something went wrong with selecting the dates.</p>
+</div>
+<div class="p-3 mb-2 bg-danger bg-gradient text-white" *ngIf="errorCode==500">
+    <p>Something went wrong with the server, please contact support.</p>
+</div>
+<div class="p-3 mb-2 bg-success bg-gradient text-white" *ngIf="success">
+    <p>Success!</p>
+    <p>Displaying available times between: {{dateFrom}} - {{dateUntil}}</p>
+</div>
+
+
+<div class="my-3">
     <div class="container">
         <div class="row">
             <form [formGroup]="formData" (ngSubmit) = "onClickSubmit(formData.value)">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <p>From <input type="date" name="dateFrom" formControlName="dateFrom"></p>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <p>Until <input type="date" name="dateUntil" formControlName="dateUntil"></p> 
             </div>
                 <input type="submit" class="btn btn-outline-primary btn-rounded" value="Search">
             </form>
         </div>
-        <p>
-            Date range entered is: {{dateFrom}} - {{dateUntil}}
-        </p>
+        <div class="my-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-2">
+                        <ul>
+                            <li *ngFor="let time of availableTimes">
+                                <p class="hover-shadow ">Available: {{time.time | date : 'yyyy-MM-dd HH:mm'}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                  </div>
+            </div>
+        </div>
+       
     </div>
 </div>
+    
