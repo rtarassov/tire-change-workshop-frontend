@@ -6,7 +6,7 @@
 </div>
 <div class="p-3 mb-2 bg-success bg-gradient text-white" *ngIf="success">
     <p>Success!</p>
-    <p>Displaying available times between: {{dateFrom}} - {{dateUntil}}</p>
+    <p>Displaying available times in 1A Gunton Rd, London workshop between: {{dateFrom}} - {{dateUntil}}</p>
 </div>
 
 
@@ -30,7 +30,7 @@
                     <div class="col-md-2">
                         <ul>
                             <li *ngFor="let time of availableTimes">
-                                <p class="hover-shadow ">Available: {{time.time | date : 'yyyy-MM-dd HH:mm'}}</p>
+                                <p class="hover-shadow">Available: {{time.time | date : 'yyyy-MM-dd HH:mm'}}</p>
                             </li>
                         </ul>
                     </div>
